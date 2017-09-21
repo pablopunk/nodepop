@@ -1,24 +1,24 @@
 # Nodepop
 
-# Install
+# Instalar
 
-## Database
+## Base de datos
 
-Configure your **mongodb** settings in a file called `auth.json`:
+Configura los parámetros de la base de datos en un archivo `auth.json`:
 
 ```json
 {
   "db_host": "my-database-url",
-  "db_user": "my-user",
-  "db_pass": "my-password",
+  "db_user": "my-database-user",
+  "db_pass": "my-database-password",
   "db_name": "my-database-name"
 }
 ```
 
-Populate database with:
+Iníciala con algunos datos de prueba:
 
 ```bash
-npm run clean_db # WARNING: Removes all data in your database!
+npm run clean_db # ATENCIÓN: Esto borra toda la base de datos
 ```
 
 ## Web
@@ -28,7 +28,7 @@ npm install
 npm start
 ```
 
-For restarting the server automatically while coding use:
+Para reiniciar el servidor automáticamente cuando estamos desarrollando:
 
 ```bash
 npm run dev
