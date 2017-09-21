@@ -25,7 +25,7 @@ npm run clean_db # WARNING: Removes all data in your database!
 
 ```bash
 npm install
-npm run start
+npm start
 ```
 
 For restarting the server automatically while coding use:
