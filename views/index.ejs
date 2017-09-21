@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="brand">Anuncios</a>
+      <div class="tags">
+        <% tags.map(function(t) { %>
+        <a href="/?tags=<%= t %>"><%= t %></a>
+        <% }) %>
+      </div>
+    </nav>
+    <section class="flex-articles">
+      <% if (!anuncios.length) { %>
+      <h3 align="left">No existen anuncios con los parámetros proporcionados</h3>
+      <% } %>
+      <% anuncios.map(function(a) { %>
+      <article class="anuncio">
+        <figure>
+          <img src="/images/<%= a.foto %>" alt="Article img"/>
+          <figcaption><%= a.venta ? 'Se vende' : 'Se busca' %></figcaption>
+        </figure>
+        <h2><%= a.nombre %></h2>
+        <h3><%= a.precio %>€</h3>
+        <small><% a.tags.map(function(t) { %>
+          <a href="/?tags=<%= t %>"><%= t %></a>
+          <% }) %>
+        </small>
+      </article>
+      <% }) %>
+    </section>
+    <nav class="pagination">
+      <% if (page !== 1) { %>
+      <a href="/?page=<%=page-1%>">prev</a>
+      <% } %>
+      <span>Page <%=page%></span>
+      <% if (!isLastPage) { %>
+      <a href="/?page=<%=page+1%>">next</a>
+      <% } %>
+    </nav>
+  </body>
+</html>

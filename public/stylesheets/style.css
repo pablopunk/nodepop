@@ -1,0 +1,89 @@
+body {
+  padding: 10px 20px;
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: steelblue;
+}
+
+a:hover {
+  text-decoration: none;
+  color: royalblue;
+  font-weight: bold;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding: 1em;
+  font-size: 1.1em;
+}
+
+.navbar .brand {
+  text-decoration: none;
+  color: hotpink;
+}
+
+@media(max-width:768px) {
+  .navbar {
+    justify-content: center;
+    font-size: 1.5em;
+  }
+  .navbar .tags {
+    display: none;
+  }
+}
+
+section.flex-articles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+article.anuncio {
+  width: 300px;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+article.anuncio img {
+  width: 200px;
+  height: 200px;
+  border-radius: 4px;
+  box-shadow: 4px 4px 15px 4px #ccc;
+}
+
+article.anuncio figcaption {
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+article.anuncio h2 {
+  margin: 0;
+}
+
+article.anuncio small {
+  color: steelblue;
+}
+
+nav.pagination {
+  margin-top: 2em;
+  border-top: 1px solid #eee;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  alig-items: center;
+}
+
+nav.pagination * {
+  margin: 0 .4em;
+}
+
+nav.pagination a {
+  text-decoration: none;
+}
