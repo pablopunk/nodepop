@@ -6,6 +6,18 @@ const mongoose = require('mongoose')
 const shuffle = require('array-shuffle')
 const Anuncio = require('../../models/Anuncio')
 
+const getFilter = req => {
+  const nombre = req.query.nombre ? { nombre: new RegExp(`^${req.query.nombre}`, 'i') } : {}
+  const tags = req.query.tags
+    ? { tags: { $in: req.query.tags.split(',') } }
+    : {}
+  const venta = req.query.venta ? { venta: req.query.venta === 'true' } : {}
+  const precioMin = req.query.precioMin ? { $gte: req.query.precioMin } : null
+  const precioMax = req.query.precioMax ? { $lte: req.query.precioMax } : null
+  const precio = (precioMin || precioMax) ? { precio: Object.assign({}, precioMin, precioMax) } : null
+  return Object.assign({}, nombre, tags, venta, precio)
+}
+
 router.get('/tags', (req, res, next) => {
   const skip = req.query.skip || 0
   const limit = req.query.limit || 0
@@ -21,16 +33,7 @@ router.get('/tags', (req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-  const nombre = req.query.nombre ? { nombre: new RegExp(`^${req.query.nombre}`, 'i') } : {}
-  const tags = req.query.tags
-    ? { tags: { $in: req.query.tags.split(',') } }
-    : {}
-  const venta = req.query.venta ? { venta: req.query.venta === 'true' } : {}
-  const precioMin = req.query.precioMin ? { $gte: req.query.precioMin } : null
-  const precioMax = req.query.precioMax ? { $lte: req.query.precioMax } : null
-  const precio = (precioMin || precioMax) ? { precio: Object.assign({}, precioMin, precioMax) } : null
-  const filter = Object.assign({}, nombre, tags, venta, precio)
-
+  const filter = getFilter(req)
   const skip = req.query.skip || 0
   const limit = req.query.limit || 0
   const count = req.query.count && req.query.count === 'true'
