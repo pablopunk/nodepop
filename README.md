@@ -1,8 +1,8 @@
 # Nodepop
 
-# Instalar
+## Instalar
 
-## Base de datos
+### Base de datos
 
 Configura los parámetros de la base de datos en un archivo `auth.json`:
 
@@ -21,7 +21,7 @@ Iníciala con algunos datos de prueba:
 npm run clean_db # ATENCIÓN: Esto borra toda la base de datos
 ```
 
-## Web
+### Web
 
 ```bash
 npm install
@@ -34,9 +34,9 @@ Para reiniciar el servidor automáticamente cuando estamos desarrollando:
 npm run dev
 ```
 
-# API
+## API
 
-## Ejemplos
+### Ejemplos
 
 Listar todos los anuncios
 
@@ -58,7 +58,7 @@ Listar todos los anuncios de venta cuyo precio esté comprendido entre 100 y 200
 
 `GET /anuncios?venta=true&precio=100-200`
 
-## Filtros
+### Filtros
 
 - `nombre`: String. Filtra los anuncios que empiecen por la cadena dada, ignorando mayúsculas y minúsculas.
 - `tags`: String. Separadas por coma, filtra los anuncios que contengan las etiquetas dadas
