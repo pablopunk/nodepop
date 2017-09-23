@@ -7,14 +7,24 @@ const shuffle = require('array-shuffle')
 const Anuncio = require('../../models/Anuncio')
 
 const getFilter = req => {
-  const nombre = req.query.nombre ? { nombre: new RegExp(`^${req.query.nombre}`, 'i') } : {}
+  const nombre = req.query.nombre
+    ? { nombre: new RegExp(`^${req.query.nombre}`, 'i') }
+    : {}
   const tags = req.query.tags
-    ? { tags: { $in: req.query.tags.split(',') } }
+    ? { tags: { $all: req.query.tags.split(',') } }
     : {}
   const venta = req.query.venta ? { venta: req.query.venta === 'true' } : {}
-  const precioMin = req.query.precioMin ? { $gte: req.query.precioMin } : null
-  const precioMax = req.query.precioMax ? { $lte: req.query.precioMax } : null
-  const precio = (precioMin || precioMax) ? { precio: Object.assign({}, precioMin, precioMax) } : null
+  let precioMin, precioMax, precio
+  if (req.query.precio) {
+    if (req.query.precio.includes('-')) {
+      ;[precioMin, precioMax] = req.query.precio.split('-')
+      precioMin = precioMin ? { $gte: parseFloat(precioMin) } : null
+      precioMax = precioMax ? { $lte: parseFloat(precioMax) } : null
+      precio = { precio: Object.assign({}, precioMin, precioMax) }
+    } else {
+      precio = { precio: parseFloat(req.query.precio) }
+    }
+  }
   return Object.assign({}, nombre, tags, venta, precio)
 }
 
@@ -38,7 +48,7 @@ router.get('/', (req, res, next) => {
   const limit = req.query.limit || 0
   const count = req.query.count && req.query.count === 'true'
 
-  Anuncio.list({ filter, skip, limit, count }, (err, list) => {
+  Anuncio.list({ filter, skip, limit, count }, (err, list) => {
     if (err) {
       next(err)
       return
