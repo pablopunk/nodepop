@@ -1,38 +1,6 @@
 # Nodepop
 
-## Instalar
-
-### Base de datos
-
-Configura los parámetros de la base de datos en un archivo `auth.json`:
-
-```json
-{
-  "db_host": "my-database-url",
-  "db_user": "my-database-user",
-  "db_pass": "my-database-password",
-  "db_name": "my-database-name"
-}
-```
-
-Iníciala con algunos datos de prueba:
-
-```bash
-npm run clean_db # ATENCIÓN: Esto borra toda la base de datos
-```
-
-### Web
-
-```bash
-npm install
-npm start
-```
-
-Para reiniciar el servidor automáticamente cuando estamos desarrollando:
-
-```bash
-npm run dev
-```
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## API
 
@@ -70,4 +38,56 @@ Listar todos los anuncios de venta cuyo precio esté comprendido entre 100 y 200
   - `-299.99`: Precio máximo de 299.99
 - `skip`: Integer. Se salta un número de anuncios para devolver
 - `limit`: Integer. Limita el número de resultados
+
+## Contribuír
+
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+Para desarrollar `nodepop` tendremos que tener en cuenta lo siguiente:
+
+### Base de datos
+
+Necesitaremos una base de datos mongodb, puedes inicializar una vacía y configurar los parámetros de la base de datos en un archivo `auth.json`:
+
+```json
+{
+  "db_host": "my-database-url",
+  "db_user": "my-database-user",
+  "db_pass": "my-database-password",
+  "db_name": "my-database-name"
+}
+```
+
+Iníciala con algunos datos de prueba:
+
+```bash
+npm run clean_db # ATENCIÓN: Esto borra toda la base de datos de anuncios
+```
+
+### Web
+
+```bash
+npm install
+npm start
+```
+
+Para reiniciar el servidor automáticamente cuando estamos desarrollando:
+
+```bash
+npm run dev
+```
+
+Correr los test:
+
+```bash
+npm test
+```
+
+### Documentación
+
+Toda esta documentación puede ser encontrada en [http://pablopunk.com/nodepop](http://pablopunk.com/nodepop). Para editarla y previsualizarla, usa [docute](docute.js.org):
+
+```bash
+docute .
+```
 

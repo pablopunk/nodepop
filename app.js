@@ -33,15 +33,15 @@ app.use('/', index)
 app.use('/apiv1/anuncios', anuncios)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
 // error handler
-app.use(function(err, req, res, next) {
-  const myError = CustomError(err, req.query.lang || 'en')
+app.use(function (err, req, res, next) {
+  const myError = CustomError(err, req.query.lang || 'en')
   // set locals, only providing error in development
   res.locals.message = myError.message
   res.locals.error = req.app.get('env') === 'development' ? myError : {}

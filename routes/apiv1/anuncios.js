@@ -2,8 +2,6 @@
 
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-const shuffle = require('array-shuffle')
 const Anuncio = require('../../models/Anuncio')
 
 const getFilter = req => {

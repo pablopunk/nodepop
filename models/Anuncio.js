@@ -12,7 +12,7 @@ const anuncioSchema = mongoose.Schema({
 })
 
 anuncioSchema.statics.list = (options, callback) => {
-  const filter = options.filter || {}
+  const filter = options.filter || {}
   const query = Anuncio.find(filter)
   if (options.skip !== null) {
     query.skip(parseInt(options.skip))
@@ -47,7 +47,7 @@ anuncioSchema.statics.listTags = (options, callback) => {
     }
     const skip = options.skip ? parseInt(options.skip) : 0
     const limit = options.limit ? parseInt(options.limit) : data.length
-    if (!!options.shuffle) {
+    if (options.shuffle) {
       data = shuffle(data)
     }
     callback(null, data.slice(skip, skip + limit))

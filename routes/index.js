@@ -8,7 +8,7 @@ const tagLimit = 6
 const itemsPerPage = 6
 
 const getSkipForPage = page => (page - 1) * tagLimit
-const getPage = req => parseInt(req.query.page) || 1
+const getPage = req => parseInt(req.query.page) || 1
 const isLastPage = (curr, count, itemsPerPage) => curr * itemsPerPage >= count
 
 /* GET home page. */
