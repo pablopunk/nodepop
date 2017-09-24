@@ -11,7 +11,7 @@ const anuncioSchema = mongoose.Schema({
   tags: [String]
 })
 
-anuncioSchema.statics.list = (options, callback) => {
+const listAnuncios = (options, callback) => {
   const filter = options.filter || {}
   const query = Anuncio.find(filter)
   if (options.skip !== null) {
@@ -20,26 +20,28 @@ anuncioSchema.statics.list = (options, callback) => {
   if (options.limit !== null) {
     query.limit(parseInt(options.limit))
   }
-  query.exec((err, data) => {
+  query.exec((err, anuncios) => {
     if (err) {
       callback(err)
       return
     }
-    if (options.count) {
+    if (options.all) {
       Anuncio.count(filter, (err, count) => {
         if (err) {
           callback(err)
           return
         }
-        callback(null, { data, count })
+        listTags({}, (err, tags) => {
+          callback(err, { anuncios, tags, count })
+        })
       })
     } else {
-      callback(null, data)
+      callback(null, anuncios)
     }
   })
 }
 
-anuncioSchema.statics.listTags = (options, callback) => {
+const listTags = (options, callback) => {
   Anuncio.find().distinct('tags', (err, data) => {
     if (err) {
       callback(err)
@@ -54,6 +56,8 @@ anuncioSchema.statics.listTags = (options, callback) => {
   })
 }
 
+anuncioSchema.statics.listTags = listTags
+anuncioSchema.statics.list = listAnuncios
 const Anuncio = mongoose.model('Anuncio', anuncioSchema)
 
 module.exports = Anuncio

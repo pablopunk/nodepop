@@ -36,11 +36,11 @@
     </section>
     <nav class="pagination">
       <% if (page !== 1) { %>
-      <a href="/?page=<%=page-1%>">&lt;</a>
+      <a href="<%= nav.prev %>">&lt;</a>
       <% } %>
       <span>Page <%=page%></span>
       <% if (!isLastPage) { %>
-      <a href="/?page=<%=page+1%>">&gt;</a>
+      <a href="<%= nav.next %>">&gt;</a>
       <% } %>
     </nav>
   </body>

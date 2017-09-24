@@ -30,8 +30,8 @@ router.get('/tags', (req, res, next) => {
   const skip = req.query.skip || 0
   const limit = req.query.limit || 0
   const shuffle = req.query.shuffle || false
-  const count = req.query.count ? req.query.count === 'true' : false
-  Anuncio.listTags({ shuffle, skip, limit, count }, (err, data) => {
+
+  Anuncio.listTags({ shuffle, skip, limit }, (err, data) => {
     if (err) {
       next(err)
       return
@@ -44,9 +44,9 @@ router.get('/', (req, res, next) => {
   const filter = getFilter(req)
   const skip = req.query.skip || 0
   const limit = req.query.limit || 0
-  const count = req.query.count && req.query.count === 'true'
+  const all = req.query.all && req.query.all === 'true'
 
-  Anuncio.list({ filter, skip, limit, count }, (err, list) => {
+  Anuncio.list({ filter, skip, limit, all }, (err, list) => {
     if (err) {
       next(err)
       return
