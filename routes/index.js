@@ -6,7 +6,7 @@ const { get } = require('axios')
 const apiUrl = 'http://localhost:3000/apiv1'
 
 const tagLimit = 6
-const itemsPerPage = 2
+const itemsPerPage = 4
 
 const getSkipForPage = page => (page - 1) * itemsPerPage
 const getPage = req => parseInt(req.query.page) || 1
