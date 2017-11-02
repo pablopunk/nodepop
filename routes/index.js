@@ -52,4 +52,10 @@ router.get('/', async (req, res, next) => {
     .catch(next)
 })
 
+router.get('/lang/:locale', (req, res, next) => {
+  const locale = req.params.locale
+  res.cookie('nodeapi-lang', locale, { maxAge: 900000, httOnly: true })
+  res.redirect(req.get('referer'))
+})
+
 module.exports = router

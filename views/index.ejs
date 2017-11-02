@@ -8,7 +8,14 @@
   </head>
   <body>
     <nav class="navbar">
-      <a href="/" class="brand">Anuncios</a>
+      <a href="/" class="brand"><%= __('Ads') %></a>
+      <div class="locales">
+        <span><%= __('Language') %></span>
+        <%- getLocales().map(lang => `
+          <a href="/lang/${lang}">${lang}</a>
+        `).join(' - ')
+        %>
+      </div>
       <div class="tags">
         <% tags.map(function(t) { %>
         <a href="/?tags=<%= t %>"><%= t %></a>
@@ -17,13 +24,13 @@
     </nav>
     <section class="flex-articles">
       <% if (!anuncios.length) { %>
-      <h3 align="left">No existen anuncios con los parámetros proporcionados</h3>
+      <h3 align="left"><%= __("There are no articles with the given parameters") %></h3>
       <% } %>
       <% anuncios.map(function(a) { %>
       <article class="anuncio">
         <figure>
           <img src="/images/anuncios/<%= a.foto %>" alt="Article img"/>
-          <figcaption><%= a.venta ? 'Se vende' : 'Se busca' %></figcaption>
+          <figcaption><%= a.venta ? __('For sale') : __('Looking for') %></figcaption>
         </figure>
         <h2><%= a.nombre %></h2>
         <h3><%= a.precio %>€</h3>
@@ -38,7 +45,7 @@
       <% if (page !== 1) { %>
       <a href="<%= nav.prev %>">&lt;</a>
       <% } %>
-      <span>Page <%=page%></span>
+      <span><%= __('Page') %> <%=page%></span>
       <% if (!isLastPage) { %>
       <a href="<%= nav.next %>">&gt;</a>
       <% } %>

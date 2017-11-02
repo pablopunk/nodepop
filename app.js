@@ -10,6 +10,8 @@ const { anuncios } = require('./routes/apiv1')
 
 const CustomError = require('./lib/custom_error')
 
+const i18n = require('./lib/config-i18n')()
+
 const app = express()
 
 const isApi = req => req.originalUrl.indexOf('/api') === 0
@@ -28,6 +30,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(i18n.init)
 
 app.use('/', index)
 app.use('/apiv1/anuncios', anuncios)
