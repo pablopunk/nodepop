@@ -49,5 +49,12 @@
       "foto": "bicicleta.jpg",
       "tags": ["lifestyle", "motor"]
     }
+  ],
+  "users": [
+    {
+      "nombre": "pablo",
+      "email": "pablo@gmail.com",
+      "password": "pass"
+    }
   ]
 }
