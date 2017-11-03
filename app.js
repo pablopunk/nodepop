@@ -57,7 +57,7 @@ app.use(function (err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? myError : {}
 
   // render the error page
-  res.status(myError.status || 500)
+  res.status(err.code || 500)
   if (isApi(req)) {
     res.json({ error: myError.message })
     return

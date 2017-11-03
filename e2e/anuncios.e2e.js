@@ -30,6 +30,18 @@ test.beforeEach(async () => {
   await fixtures.init()
 })
 
+test('Retorna un 401 para la API sin autenticar', async t => {
+  const res = await agent.get(anunciosUrl)
+  t.is(res.statusCode, 401)
+  t.deepEqual(res.body, { ok: false, error: 'unauthorized' })
+})
+
+test('Retorna un 401 para un token invalido', async t => {
+  const res = await agent.get(anunciosUrl).send({ token: 'foo-bar' })
+  t.is(res.statusCode, 401)
+  t.deepEqual(res.body, { ok: false, error: 'invalid token' })
+})
+
 test('Retorna un JWT', async t => {
   const res = await agent
     .post(authUrl)
@@ -38,7 +50,7 @@ test('Retorna un JWT', async t => {
   token = res.body.token
 })
 
-test('Retorna un codigo 200', async t => {
+test('Retorna un 200 para la API autenticada', async t => {
   const res = await agent.get(anunciosUrl).send({ token })
   t.is(res.statusCode, 200)
 })

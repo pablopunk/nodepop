@@ -5,8 +5,8 @@
 	"For sale": "For sale",
 	"Looking for": "Looking for",
 	"Language": "Language",
-	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"",
 	"Not Found": "Not Found",
 	"no token provided": "no token provided",
-	"Request failed with status code 500": "Request failed with status code 500"
+	"Request failed with status code 500": "Request failed with status code 500",
+	"invalid token": "invalid token"
 }
