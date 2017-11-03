@@ -1,3 +1,4 @@
 module.exports = {
-  'anuncios': require('./anuncios')
+  'anuncios': require('./anuncios'),
+  'auth': require('./auth')
 }

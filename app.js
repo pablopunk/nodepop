@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const path = require('path')
 // const favicon = require('serve-favicon')
@@ -6,7 +7,9 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
 const index = require('./routes/index')
-const { anuncios } = require('./routes/apiv1')
+const { anuncios, auth } = require('./routes/apiv1')
+
+const jwtAuth = require('./lib/jwtAuth')
 
 const CustomError = require('./lib/custom_error')
 
@@ -36,7 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(i18n.init)
 
 app.use('/', index)
-app.use('/apiv1/anuncios', anuncios)
+app.use('/apiv1/anuncios', jwtAuth(), anuncios)
+app.use('/apiv1/authenticate', auth)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
