@@ -8,8 +8,8 @@
     "dev": "cross-env DEBUG=nodepop:* nodemon",
     "clean_db": "node clean_db.js",
     "test": "npm run lint && npm run e2e",
-    "e2e": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava -v **/e2e/*.e2e.js",
-    "e2ew": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava -v **/e2e/*.e2e.js --watch"
+    "e2e": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava -v --fail-fast **/e2e/*.e2e.js",
+    "e2ew": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava -v --fail-fast **/e2e/*.e2e.js --watch"
   },
   "dependencies": {
     "array-shuffle": "^1.0.1",

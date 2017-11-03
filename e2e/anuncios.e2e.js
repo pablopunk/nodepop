@@ -11,8 +11,8 @@ const mockgoose = new Mockgoose(mongoose)
 
 const anunciosUrl = '/apiv1/anuncios'
 const authUrl = '/apiv1/authenticate'
-let agent
 
+let agent
 let token
 
 test.before(async function () {

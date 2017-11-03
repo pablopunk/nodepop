@@ -8,5 +8,6 @@
 	"Not Found": "Not Found",
 	"no token provided": "no token provided",
 	"Request failed with status code 500": "Request failed with status code 500",
-	"invalid token": "invalid token"
+	"invalid token": "invalid token",
+	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\""
 }

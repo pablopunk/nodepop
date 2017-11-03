@@ -18,7 +18,13 @@ router.post('/', async (req, res, next) => {
     return
   }
 
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET)
+  let secret
+  if (process.env.NODE_ENV === 'test') {
+    secret = 'secret'
+  } else {
+    secret = process.env.JWT_SECRET
+  }
+  const token = jwt.sign({ _id: user._id }, secret)
   res.json({ ok: true, token })
 })
 

@@ -7,5 +7,6 @@
 	"Language": "Linguaxe",
 	"no token provided": "non se proporcionou un token",
 	"Request failed with status code 500": "A petición fallou cun erro 500",
-	"invalid token": "token inválido"
+	"invalid token": "token inválido",
+	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\""
 }
