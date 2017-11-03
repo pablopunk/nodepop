@@ -8,5 +8,10 @@
 	"no token provided": "non se proporcionou un token",
 	"Request failed with status code 500": "A petición fallou cun erro 500",
 	"invalid token": "token inválido",
-	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\""
+	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"",
+	"Not Found": "Not Found",
+	"Request failed with status code 401": "Request failed with status code 401",
+	"/Users/pol/src/master/backend-avanzado/nodepop/views/index": {
+		"ejs": "20\n    18|       </div>\n    19|       <div class=\"tags\">\n >> 20|         <% tags.map(function(t) { %>\n    21|         <a href=\"/?tags=<%= t %>\"><%= t %></a>\n    22|         <% }) %>\n    23|       </div>\n\nCannot read property 'map' of undefined"
+	}
 }

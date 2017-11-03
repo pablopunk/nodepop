@@ -1,9 +1,8 @@
 const urllib = require('url')
 const express = require('express')
 const router = express.Router()
-const { get } = require('axios')
-
-const apiUrl = 'http://localhost:3000/apiv1'
+const Anuncio = require('../models/Anuncio')
+const { getFilter } = require('../lib/filter')
 
 const itemsPerPage = 4
 
@@ -27,28 +26,25 @@ const getPagesNav = req => ({
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-  get(`${apiUrl}/anuncios`, {
-    params: Object.assign(
-      {},
-      {
-        limit: itemsPerPage,
-        skip: req.query.page ? getSkipForPage(req.query.page) : 0,
-        all: true
-      },
-      req.query
-    )
+  Anuncio.list({
+    filter: getFilter(req),
+    limit: itemsPerPage,
+    skip: req.query.page ? getSkipForPage(req.query.page) : 0,
+    all: true
+  }, (err, data) => {
+    if (err) {
+      next(err)
+      return
+    }
+    res.render('index', {
+      title: 'Anuncios',
+      anuncios: data.anuncios,
+      tags: data.tags,
+      page: getPage(req),
+      isLastPage: isLastPage(getPage(req), data.count, itemsPerPage),
+      nav: getPagesNav(req)
+    })
   })
-    .then(fetched =>
-      res.render('index', {
-        title: 'Anuncios',
-        anuncios: fetched.data.anuncios,
-        tags: fetched.data.tags,
-        page: getPage(req),
-        isLastPage: isLastPage(getPage(req), fetched.data.count, itemsPerPage),
-        nav: getPagesNav(req)
-      })
-    )
-    .catch(next)
 })
 
 router.get('/lang/:locale', (req, res, next) => {

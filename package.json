@@ -12,10 +12,12 @@
     "e2ew": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava -v --fail-fast **/e2e/*.e2e.js --watch"
   },
   "dependencies": {
+    "amqplib": "^0.5.1",
     "array-shuffle": "^1.0.1",
     "axios": "^0.16.2",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
+    "cote": "^0.15.1",
     "debug": "~2.6.3",
     "dotenv": "^4.0.0",
     "ejs": "~2.5.6",
@@ -25,7 +27,8 @@
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.11.12",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "unique-string": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.23.0",

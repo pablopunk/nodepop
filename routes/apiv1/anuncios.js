@@ -1,30 +1,11 @@
 'use strict'
 
 const express = require('express')
+const uniqueString = require('unique-string')
+const amqp = require('amqplib/callback_api')
 const router = express.Router()
 const Anuncio = require('../../models/Anuncio')
-
-const getFilter = req => {
-  const nombre = req.query.nombre
-    ? { nombre: new RegExp(`^${req.query.nombre}`, 'i') }
-    : {}
-  const tags = req.query.tags
-    ? { tags: { $all: req.query.tags.split(',') } }
-    : {}
-  const venta = req.query.venta ? { venta: req.query.venta === 'true' } : {}
-  let precioMin, precioMax, precio
-  if (req.query.precio) {
-    if (req.query.precio.includes('-')) {
-      ;[precioMin, precioMax] = req.query.precio.split('-')
-      precioMin = precioMin ? { $gte: parseFloat(precioMin) } : null
-      precioMax = precioMax ? { $lte: parseFloat(precioMax) } : null
-      precio = { precio: Object.assign({}, precioMin, precioMax) }
-    } else {
-      precio = { precio: parseFloat(req.query.precio) }
-    }
-  }
-  return Object.assign({}, nombre, tags, venta, precio)
-}
+const { getFilter } = require('../../lib/filter')
 
 router.get('/tags', (req, res, next) => {
   const skip = req.query.skip || 0
@@ -66,7 +47,27 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-  const anuncio = new Anuncio(req.body)
+  const uniqueName = uniqueString()
+  const anuncio = new Anuncio(
+    Object.assign(req.body, {
+      foto: uniqueName
+    })
+  )
+  const image = {
+    nombre: uniqueName,
+    base64: req.body.image
+  }
+  // añadir imagen a la cola rabbitMQ con el nombre
+  amqp.connect('amqp://localhost', function (e, conn) {
+    conn.createChannel(function (e, ch) {
+      const q = 'nodepop_images'
+      ch.assertQueue(q, { durable: true })
+      ch.sendToQueue(q, Buffer.from(JSON.stringify(image)))
+    })
+    setTimeout(function () {
+      conn.close()
+    }, 500)
+  })
   anuncio.save((err, data) => {
     if (err) {
       next(err)
