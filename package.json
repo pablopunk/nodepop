@@ -8,8 +8,8 @@
     "dev": "cross-env DEBUG=nodepop:* nodemon",
     "clean_db": "node clean_db.js",
     "test": "npm run lint && npm run e2e",
-    "e2e": "cross-env LOG_FORMAT=nolog NODE_ENV=test mocha **/e2e/*.e2e.js --recursive --timeout 120000",
-    "e2ew": "cross-env LOG_FORMAT=nolog NODE_ENV=test mocha **/e2e/*.e2e.js --recursive --watch --timeout 120000"
+    "e2e": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava **/e2e/*.e2e.js",
+    "e2ew": "cross-env LOG_FORMAT=nolog NODE_ENV=test ava **/e2e/*.e2e.js --watch"
   },
   "dependencies": {
     "array-shuffle": "^1.0.1",
@@ -26,8 +26,8 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
+    "ava": "^0.23.0",
     "cross-env": "^5.1.1",
-    "mocha": "^4.0.1",
     "mockgoose": "^7.3.3",
     "nodemon": "^1.12.1",
     "standard": "^10.0.3",
