@@ -45,7 +45,7 @@ test('Retorna un 401 para un token invalido', async t => {
 test('Retorna un JWT', async t => {
   const res = await agent
     .post(authUrl)
-    .send({ email: 'pablo@gmail.com', password: 'pass' })
+    .send({ email: 'user@example', password: '1234' })
   t.true(res.body.ok)
   token = res.body.token
 })

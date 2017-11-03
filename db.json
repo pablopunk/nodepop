@@ -52,9 +52,9 @@
   ],
   "users": [
     {
-      "nombre": "pablo",
-      "email": "pablo@gmail.com",
-      "password": "pass"
+      "nombre": "User",
+      "email": "user@example.com",
+      "password": "1234"
     }
   ]
 }
