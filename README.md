@@ -90,7 +90,7 @@ Necesitaremos una base de datos mongodb, puedes inicializar una vacía y configu
 Iníciala con algunos datos de prueba:
 
 ```bash
-npm run clean_db # ATENCIÓN: Esto borra toda la base de datos de anuncios
+npm run clean_db # ATENCIÓN: Esto borra toda la base de datos de anuncios y usuarios
 ```
 
 
