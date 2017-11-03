@@ -5,8 +5,12 @@ const uniqueString = require('unique-string')
 const amqp = require('amqplib/callback_api')
 const router = express.Router()
 const Anuncio = require('../../models/Anuncio')
-const rabbitHost = require('../../auth.json').rabbitmq_host
 const { getFilter } = require('../../lib/filter')
+
+let rabbitHost
+if (process.env.NODE_ENV !== 'test') {
+  rabbitHost = require('../../auth.json').rabbitmq_host
+}
 
 router.get('/tags', (req, res, next) => {
   const skip = req.query.skip || 0
