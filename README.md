@@ -31,22 +31,26 @@ Listar todos los anuncios de venta, todas las etiquetas, y el numero total de an
 
 Crear un anuncio
 
-`POST /anuncios
+`POST /anuncios`
+```js
 {
   nombre: 'Monitor Asus 22"',
   precio: 109,
   venta: true
-}`
+}
+```
 
 Para crear un anuncio con una imagen, hay que pasarle el string `base64` de esa imagen. Por ejemplo, [aquí](https://www.base64-image.de/) podemos convertir cualquier imagen a `base64`. El formato preferible es `jpg`:
 
-`POST /anuncios
+`POST /anuncios`
+```js
 {
   nombre: 'Monitor Asus 22"',
   precio: 109,
   venta: true,
   imagen: 'data:image/jpeg;base64,/9j/4AA...'
-}`
+}
+```
 
 ### Filtros
 
