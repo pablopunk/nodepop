@@ -29,7 +29,7 @@
       <% anuncios.map(function(a) { %>
       <article class="anuncio">
         <figure>
-          <img src="/images/anuncios/<%= a.foto %>" alt="Article img"/>
+          <img src="/images/anuncios/<%= a.foto %>-thumbnail.jpg" alt="Article img"/>
           <figcaption><%= a.venta ? __('For sale') : __('Looking for') %></figcaption>
         </figure>
         <h2><%= a.nombre %></h2>

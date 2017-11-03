@@ -5,6 +5,7 @@ const uniqueString = require('unique-string')
 const amqp = require('amqplib/callback_api')
 const router = express.Router()
 const Anuncio = require('../../models/Anuncio')
+const rabbitHost = require('../../auth.json').rabbitmq_host
 const { getFilter } = require('../../lib/filter')
 
 router.get('/tags', (req, res, next) => {
@@ -53,21 +54,23 @@ router.post('/', (req, res, next) => {
       foto: uniqueName
     })
   )
-  const image = {
-    nombre: uniqueName,
-    base64: req.body.image
-  }
-  // añadir imagen a la cola rabbitMQ con el nombre
-  amqp.connect('amqp://localhost', function (e, conn) {
-    conn.createChannel(function (e, ch) {
-      const q = 'nodepop_images'
-      ch.assertQueue(q, { durable: true })
-      ch.sendToQueue(q, Buffer.from(JSON.stringify(image)))
+
+  if (req.body.imagen) {
+    const image = {
+      nombre: uniqueName,
+      base64: req.body.imagen
+    }
+    amqp.connect(`amqp://${rabbitHost}`, function (e, conn) {
+      conn.createChannel(function (e, ch) {
+        const q = 'nodepop_images'
+        ch.assertQueue(q, { durable: true })
+        ch.sendToQueue(q, Buffer.from(JSON.stringify(image)))
+      })
+      setTimeout(function () {
+        conn.close()
+      }, 500)
     })
-    setTimeout(function () {
-      conn.close()
-    }, 500)
-  })
+  }
   anuncio.save((err, data) => {
     if (err) {
       next(err)

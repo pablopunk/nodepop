@@ -4,49 +4,49 @@
       "nombre": "iPhone 6s",
       "venta": true,
       "precio": 329.99,
-      "foto": "iphone6s.jpg",
+      "foto": "iphone6s",
       "tags": ["mobile"]
     },
     {
       "nombre": "iPad Mini 4",
       "venta": true,
       "precio": 129.99,
-      "foto": "ipadmini4.jpg",
+      "foto": "ipadmini4",
       "tags": ["mobile", "work"]
     },
     {
       "nombre": "Olympus OM10",
       "venta": false,
       "precio": 250,
-      "foto": "olympusom10.jpg",
+      "foto": "olympusom10",
       "tags": ["lifestyle", "work"]
     },
     {
       "nombre": "Panasonic Lumix GM1",
       "venta": true,
       "precio": 199,
-      "foto": "panasoniclumixgm1.jpg",
+      "foto": "panasoniclumixgm1",
       "tags": ["lifestyle", "work"]
     },
     {
       "nombre": "Office chair",
       "venta": false,
       "precio": 30,
-      "foto": "officechair.jpg",
+      "foto": "officechair",
       "tags": ["work"]
     },
     {
       "nombre": "Ikea desk",
       "venta": true,
       "precio": 79.99,
-      "foto": "ikeadesk.jpg",
+      "foto": "ikeadesk",
       "tags": ["work"]
     },
     {
       "nombre": "Bicicleta",
       "venta": false,
       "precio": 100,
-      "foto": "bicicleta.jpg",
+      "foto": "bicicleta",
       "tags": ["lifestyle", "motor"]
     }
   ],

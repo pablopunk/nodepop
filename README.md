@@ -29,6 +29,24 @@ Listar todos los anuncios de venta, todas las etiquetas, y el numero total de an
 
 `GET /anuncios?venta=true&all=true`
 
+Crear un anuncio
+
+`POST /anuncios
+{
+  nombre: 'Monitor Asus 22"',
+  precio: 109,
+  venta: true
+}`
+
+Para crear un anuncio con una imagen, hay que pasarle el string `base64` de esa imagen. Por ejemplo, [aquí](https://www.base64-image.de/) podemos convertir cualquier imagen a `base64`. El formato preferible es `jpg`:
+
+`POST /anuncios
+{
+  nombre: 'Monitor Asus 22"',
+  precio: 109,
+  venta: true,
+  imagen: 'data:image/jpeg;base64,/9j/4AA...'
+}`
 
 ### Filtros
 
@@ -53,14 +71,15 @@ Para desarrollar `nodepop` tendremos que tener en cuenta lo siguiente:
 
 ### Base de datos
 
-Necesitaremos una base de datos mongodb, puedes inicializar una vacía y configurar los parámetros de la base de datos en un archivo `auth.json`:
+Necesitaremos una base de datos mongodb, puedes inicializar una vacía y configurar los parámetros de la base de datos en un archivo `auth.json`. También necesitaremos una cola rabbitmq:
 
 ```json
 {
   "db_host": "my-database-url",
   "db_user": "my-database-user",
   "db_pass": "my-database-password",
-  "db_name": "my-database-name"
+  "db_name": "my-database-name",
+  "rabbitmq_host": "my-rabbit-host"
 }
 ```
 
@@ -78,7 +97,7 @@ npm install
 npm start
 ```
 
-Para reiniciar el servidor automáticamente cuando estamos desarrollando:
+Para reiniciar el servidor y el microservicio de las imágenes automáticamente cuando estamos desarrollando:
 
 ```bash
 npm run dev
