@@ -4,5 +4,6 @@
 	"Page": "Páxina",
 	"For sale": "Véndese",
 	"Looking for": "Búscase",
-	"Language": "Linguaxe"
+	"Language": "Linguaxe",
+	"Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\"": "Cast to ObjectId failed for value \"foo\" at path \"_id\" for model \"Anuncio\""
 }
