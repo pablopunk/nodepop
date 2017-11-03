@@ -25,7 +25,6 @@ require('amqplib/callback_api')
           const ext = getExtension(image.base64)
           image.base64 = removeBase64(image.base64)
           jimp.read(Buffer.from(image.base64, 'base64')).then(i => {
-            i.write(`${imagesFolder}/${image.nombre}.${ext}`)
             i
               .resize(100, 100)
               .write(`${imagesFolder}/${image.nombre}-thumbnail.${ext}`)

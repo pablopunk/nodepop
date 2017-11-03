@@ -1,11 +1,17 @@
 'use strict'
 
 const express = require('express')
+const { join } = require('path')
+const jimp = require('jimp')
 const uniqueString = require('unique-string')
 const amqp = require('amqplib/callback_api')
 const router = express.Router()
 const Anuncio = require('../../models/Anuncio')
 const { getFilter } = require('../../lib/filter')
+
+const imagesFolder = join(__dirname, '..', '..', 'public', 'images', 'anuncios')
+
+const removeBase64 = img => img.replace(/^data:image\/[a-z]+;base64,/, '')
 
 let rabbitHost
 if (process.env.NODE_ENV !== 'test') {
@@ -64,6 +70,13 @@ router.post('/', (req, res, next) => {
       nombre: uniqueName,
       base64: req.body.imagen
     }
+
+    jimp.read(Buffer.from(removeBase64(image.base64), 'base64'))
+      .then(i => {
+        console.log(`${imagesFolder}/${image.nombre}.jpg`)
+        i.write(`${imagesFolder}/${image.nombre}.jpg`)
+      })
+
     amqp.connect(`amqp://${rabbitHost}`, function (e, conn) {
       conn.createChannel(function (e, ch) {
         const q = 'nodepop_images'
