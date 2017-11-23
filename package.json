@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"node ./bin/www\" \"npm run images\"",
+    "start": "concurrently \"npm run server\" \"npm run images\"",
+    "server": "node ./bin/www",
     "lint": "standard --fix",
     "dev": "concurrently \"cross-env DEBUG=nodepop:* nodemon\" \"npm run images\"",
     "images": "node images-microservice.js",
